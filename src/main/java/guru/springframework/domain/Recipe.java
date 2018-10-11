@@ -16,6 +16,11 @@ public class Recipe {
     private String url;
     //todo add
     //private Difficulty difficulty;
+
+    @Lob
+    private String directions;
+
+
     @Lob
     private Byte[] image;
 
@@ -33,6 +38,8 @@ public class Recipe {
             joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories;
+
+
 
 
 
@@ -90,6 +97,14 @@ public class Recipe {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getDirections() {
+        return directions;
+    }
+
+    public void setDirections(String directions) {
+        this.directions = directions;
     }
 
     public Byte[] getImage() {
