@@ -22,6 +22,7 @@ public class IndexController {
 
         model.addAttribute("recipes", recipeService.getAllRecipes());
 
+
     return "index";
     }
 }
