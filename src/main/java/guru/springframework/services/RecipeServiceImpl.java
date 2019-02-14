@@ -1,5 +1,8 @@
 package guru.springframework.services;
 
+import guru.springframework.commands.RecipeCommand;
+import guru.springframework.converters.RecipeCommandToRecipe;
+import guru.springframework.converters.RecipeToRecipeCommand;
 import guru.springframework.domain.Recipe;
 import guru.springframework.repositories.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,30 +16,34 @@ import java.util.Set;
 public class RecipeServiceImpl implements RecipeService {
 
     private RecipeRepository recipeRepository;
+    private RecipeToRecipeCommand recipeConverter;
+
+
 
     @Autowired
-    public RecipeServiceImpl(RecipeRepository recipeRepository) {
+    public RecipeServiceImpl(RecipeRepository recipeRepository, RecipeToRecipeCommand recipeConverter) {
         this.recipeRepository = recipeRepository;
+        this.recipeConverter = recipeConverter;
     }
 
     @Override
-    public Set<Recipe> getAllRecipes() {
+    public Set<RecipeCommand> getAllRecipes() {
 
-        Set<Recipe> recipes = new HashSet<>();
-        recipeRepository.findAll().iterator().forEachRemaining(r -> recipes.add(r));
+        Set<RecipeCommand> recipes = new HashSet<RecipeCommand>();
+        recipeRepository.findAll().iterator().forEachRemaining(r -> recipes.add(recipeConverter.convert(r)));
         return recipes;
 
     }
 
     @Override
-    public Recipe findById(Long l) {
+    public RecipeCommand findById(Long l) {
         Optional<Recipe> recipeOptional = recipeRepository.findById(l);
 
         if (!recipeOptional.isPresent()){
             throw new RuntimeException("Recipe not found!");
         }
 
-        return recipeOptional.get();
+        return recipeConverter.convert(recipeOptional.get());
 
     }
 

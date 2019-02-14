@@ -32,7 +32,7 @@
                             </div>
                             <div class="col-md-9">
                                 <ul>
-                                    <!--/*@thymesVar id="recipe" type="guru.springframework.Domain.Recipe"*/-->
+                                    <!--/*@thymesVar id="recipe" type="guru.springframework.commands.RecipeCommand"*/-->
                                     <li th:remove="all">cat one</li>
                                     <li th:remove="all">cat two</li>
                                     <li th:each="category : ${recipe.categories}" th:text="${category.getDescription()}">cat three</li>
@@ -44,7 +44,7 @@
                                 <h5>Prep Time:</h5>
                             </div>
                             <div class="col-md-3">
-                                <!--/*@thymesVar id="recipe" type="guru.springframework.Domain.Recipe"*/-->
+                                <!--/*@thymesVar id="recipe" type="guru.springframework.commands.RecipeCommand"*/-->
                                 <p th:text="${recipe.getPrepTime() + ' min'}">30 min</p>
                             </div>
                             <div class="col-md-3">

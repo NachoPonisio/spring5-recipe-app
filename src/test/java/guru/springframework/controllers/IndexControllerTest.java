@@ -1,5 +1,7 @@
 package guru.springframework.controllers;
 
+import guru.springframework.commands.RecipeCommand;
+import guru.springframework.converters.RecipeToRecipeCommand;
 import guru.springframework.domain.Recipe;
 import guru.springframework.services.RecipeService;
 import org.junit.Before;
@@ -31,6 +33,7 @@ public class IndexControllerTest {
 
     IndexController controller;
 
+
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
@@ -51,10 +54,10 @@ public class IndexControllerTest {
     @Test
     public void getIndexPage() {
         //given
-        Set<Recipe> recipeSet = new HashSet<Recipe>();
-        recipeSet.add(new Recipe());
+        Set<RecipeCommand> recipeSet = new HashSet<RecipeCommand>();
+        recipeSet.add(new RecipeCommand());
 
-        Recipe recipe = new Recipe();
+        RecipeCommand recipe = new RecipeCommand();
         recipe.setId(1L);
 
         recipeSet.add(recipe);

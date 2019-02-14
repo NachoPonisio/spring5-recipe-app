@@ -1,11 +1,12 @@
 package guru.springframework.services;
 
+import guru.springframework.commands.RecipeCommand;
 import guru.springframework.domain.Recipe;
 
 import java.util.Set;
 
 public interface RecipeService {
 
-    Set<Recipe> getAllRecipes();
-    Recipe findById(Long l);
+    Set<RecipeCommand> getAllRecipes();
+    RecipeCommand findById(Long l);
 }
