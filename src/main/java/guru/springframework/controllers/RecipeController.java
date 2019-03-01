@@ -1,11 +1,14 @@
 package guru.springframework.controllers;
 
+import guru.springframework.commands.RecipeCommand;
 import guru.springframework.services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class RecipeController {
@@ -15,7 +18,7 @@ public class RecipeController {
 
     @Autowired
     public RecipeController(RecipeService recipeService) {
-        this.setRecipeService(recipeService);
+        this.recipeService = recipeService;
     }
 
     @RequestMapping("/recipe/show/{id}")
@@ -27,14 +30,21 @@ public class RecipeController {
 
     }
 
+    @RequestMapping("recipe/new")
+    private String createOrUpdateRecipe(Model model){
+        model.addAttribute("recipe", new RecipeCommand());
 
+        return "recipe/recipeform";
 
-
-    public RecipeService getRecipeService() {
-        return recipeService;
     }
 
-    public void setRecipeService(RecipeService recipeService) {
-        this.recipeService = recipeService;
+    @RequestMapping(name = "/recipe", method = RequestMethod.POST)
+    private String saveRecipe(@ModelAttribute RecipeCommand command){
+        RecipeCommand savedRecipeCommand = recipeService.saveRecipeCommand(command);
+
+        return "redirect:/recipe/show/" + savedRecipeCommand.getId();
     }
+
+
+
 }
