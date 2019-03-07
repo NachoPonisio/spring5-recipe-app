@@ -3,11 +3,9 @@ package guru.springframework.converters;
 import guru.springframework.commands.IngredientCommand;
 import guru.springframework.commands.UnitOfMeasureCommand;
 import guru.springframework.domain.Ingredient;
-import guru.springframework.domain.UnitOfMeasure;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.lang.reflect.Executable;
 import java.math.BigDecimal;
 
 import static org.junit.Assert.*;
@@ -34,7 +32,7 @@ public class IngredientCommandToIngredientTest {
         //when
         IngredientCommand source = new IngredientCommand();
         UnitOfMeasureCommand unitOfMeasureCommand = new UnitOfMeasureCommand();
-        source.setUnitOfMeasure(unitOfMeasureCommand);
+        source.setUom(unitOfMeasureCommand);
 
         //then
         assertNotNull(converter.convert(source));
@@ -62,7 +60,7 @@ public class IngredientCommandToIngredientTest {
         source.setId(ID);
         source.setAmount(AMOUNT);
         source.setDescription(DESCRIPTION);
-        source.setUnitOfMeasure(unitOfMeasureCommand);
+        source.setUom(unitOfMeasureCommand);
 
 
         //when
