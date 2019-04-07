@@ -27,9 +27,9 @@ public class IngredientControllerTest {
     @Mock
     IngredientService ingredientService;
 
-    IngredientController ingredientController;
+    private IngredientController ingredientController;
 
-    MockMvc mockMvc;
+    private MockMvc mockMvc;
 
 
     @Before
@@ -66,7 +66,7 @@ public class IngredientControllerTest {
         when(ingredientService.findByRecipeIdAndIngredientId(anyLong(), anyLong())).thenReturn(ingredientCommand);
 
         //when
-        mockMvc.perform(get("/recipe/1/ingredient/1/show"))
+        mockMvc.perform(get("/recipe/1/ingredients/1/show"))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(view().name("recipe/ingredients/show"))
                 .andExpect(model().attributeExists("ingredient"));
